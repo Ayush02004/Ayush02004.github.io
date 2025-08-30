@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', function(){
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click', e=>{
-      // ignore external links that start with '#!' etc.
       const href = a.getAttribute('href');
       if(!href || href.length === 0 || href === '#') return;
       e.preventDefault();
@@ -14,28 +13,25 @@ document.addEventListener('DOMContentLoaded', function(){
   // Profile photo fallback logic
   const img = document.getElementById('profile-photo');
   const initials = document.getElementById('initials-fallback');
-  if(!img) return;
-
-  // If the image fails to load, hide it and reveal initials fallback.
-  img.addEventListener('error', ()=>{
-    img.style.display = 'none';
-    initials.style.display = 'grid';
-  });
-
-  // If it loads successfully, hide initials
-  img.addEventListener('load', ()=>{
-    initials.style.display = 'none';
-  });
-
-  // Try to fetch the image to get a quick failure if missing (optional)
-  // This makes the fallback faster on some hosts
-  fetch(img.src, {method:'HEAD'})
-    .then(resp=>{
-      if(!resp.ok) throw new Error('image not found');
-      // do nothing — load event will handle hiding initials
-    })
-    .catch(()=>{
+  if(img){
+    img.addEventListener('error', ()=>{
       img.style.display = 'none';
       initials.style.display = 'grid';
     });
+    img.addEventListener('load', ()=>{
+      initials.style.display = 'none';
+    });
+
+    // quick HEAD check to fail fast
+    fetch(img.src, {method:'HEAD'})
+      .then(resp=>{ if(!resp.ok) throw new Error('not found'); })
+      .catch(()=>{ img.style.display='none'; initials.style.display='grid'; });
+  }
+
+  // Project thumbnail fallback: hide broken images so layout stays clean
+  document.querySelectorAll('.project-thumb').forEach(img => {
+    img.addEventListener('error', ()=>{ img.style.display = 'none'; });
+    // also try HEAD fetch to quickly detect missing images on some hosts
+    fetch(img.src, {method:'HEAD'}).then(r=>{ if(!r.ok) throw new Error('no'); }).catch(()=>{ img.style.display = 'none'; });
+  });
 });

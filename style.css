@@ -14,7 +14,7 @@ html,body{height:100%}
 body{
   margin:0;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  background: linear-gradient(180deg,var(--bg),#06070a 120%);
+  background: var(--bg); /* solid background to avoid mid-page gradient seams */
   color: #e6eef8;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
@@ -49,7 +49,7 @@ nav{display:flex; align-items:center; justify-content:space-between; gap:1rem; p
 
 .profile-aside{width:320px}
 .profile-card{display:flex; flex-direction:column; gap:.9rem}
-.photo-wrap{position:relative; width:100%; height:180px; display:grid; place-items:center; border-radius:10px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.02)}
+.photo-wrap{position:relative; width:100%; height:220px; display:grid; place-items:center; border-radius:10px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.02)}
 #profile-photo{width:100%; height:100%; object-fit:cover; display:block}
 #initials-fallback{position:absolute; inset:0; display:grid; place-items:center; font-weight:800; font-size:2rem; color:var(--accent); background:transparent}
 
@@ -65,16 +65,25 @@ h2.section-title{text-align:center; font-size:1.5rem; margin-bottom:1rem}
 .skills{display:flex; gap:.6rem; flex-wrap:wrap}
 .chip{background:var(--glass-2); padding:.45rem .7rem; border-radius:999px; color:var(--muted); font-weight:600; font-size:.9rem; border:1px solid rgba(255,255,255,0.02)}
 
-/* Projects */
+/* Projects with thumbnails */
 .projects-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem}
-.project-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
-.project-card h3{margin:0 0 .5rem 0}
+.project-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.03); display:flex; flex-direction:column; gap:.6rem}
+.project-thumb{width:100%; height:140px; object-fit:cover; border-radius:8px; border:1px solid rgba(255,255,255,0.02)}
+.project-card h3{margin:0 0 .2rem 0}
 .meta{font-size:.85rem; color:var(--muted)}
 .link-row{margin-top:.6rem}
 
 /* Experience & Education */
 .exp-item{display:flex; justify-content:space-between; gap:1rem; align-items:flex-start}
 .edu-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem}
+
+/* Timeline */
+.timeline{position:relative; padding-left:36px}
+.timeline:before{content:''; position:absolute; left:18px; top:0; bottom:0; width:2px; background:linear-gradient(180deg, rgba(124,92,255,0.18), rgba(124,92,255,0.07)); border-radius:2px}
+.timeline-item{position:relative; margin-bottom:1rem}
+.timeline-item:before{content:''; position:absolute; left:10px; top:6px; width:16px; height:16px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 6px rgba(124,92,255,0.06)}
+.timeline-item time{display:block; position:absolute; left:-120px; width:100px; text-align:right; color:var(--muted); top:0}
+.timeline-content{margin-left:0}
 
 /* Certificates margin fix: ensure consistent spacing */
 .certificates ul{margin:0.6rem 0 0 1rem; padding:0}
@@ -88,4 +97,7 @@ footer{margin-top:2rem; padding:2rem 0; color:var(--muted); border-top:1px solid
   .profile-aside{width:100%}
   nav{padding:0.6rem 1rem}
   .hero-inner{flex-direction:column}
+  .timeline:before{left:8px}
+  .timeline-item:before{left:2px}
+  .timeline-item time{left:-80px}
 }

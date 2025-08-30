@@ -40,7 +40,7 @@
     <section class="hero" id="home">
       <div class="hero-inner">
 
-        <div class="hero-card" style="flex:1">
+        <div class="hero-card">
           <h1>Hi — I'm <span class="accent">Ayush Gupta</span></h1>
           <p class="lead">Final-year B.Tech (CSE) building ML & GenAI systems — model prototyping, RAG pipelines, and production-ready APIs. Currently doing data analysis & MLOps work with REST APIs, Docker and vector-based retrieval.</p>
 
@@ -54,7 +54,6 @@
         <aside class="profile-aside">
           <div class="profile-card card">
             <div class="photo-wrap">
-              <!-- script.js will replace this <img> if the file is missing or fails to load -->
               <img id="profile-photo" src="profile.jpg" alt="Ayush Gupta" crossorigin="anonymous">
               <div id="initials-fallback" class="initials" aria-hidden="true">AG</div>
             </div>
@@ -138,6 +137,8 @@
       <div class="projects-grid">
 
         <article class="project-card">
+          <!-- optional thumbnail: put image at projects/brain.jpg -->
+          <img class="project-thumb" src="projects/brain.jpg" alt="Brain Tumor Detection preview">
           <h3>Brain Tumor Detection</h3>
           <p class="meta">TensorFlow · CNN · Kaggle</p>
           <p class="muted">Trained on a 5,000+ CT-image dataset with augmentation & cross-validation. Exported as a TF SavedModel and wrapped with a REST demo.</p>
@@ -145,6 +146,7 @@
         </article>
 
         <article class="project-card">
+          <img class="project-thumb" src="projects/video.jpg" alt="Video Summarization preview">
           <h3>Video Summarization (Chromium Extension)</h3>
           <p class="meta">JavaScript · LLMs · Extension</p>
           <p class="muted">Extension that summarizes videos and answers queries using an LLM API; built with batching, caching and background workers.</p>
@@ -152,6 +154,7 @@
         </article>
 
         <article class="project-card">
+          <img class="project-thumb" src="projects/rag.jpg" alt="RAG Prototype preview">
           <h3>Retrieval-Augmented Generation — RAG Prototype (HackRx)</h3>
           <p class="meta">LangChain · Gemini API · FastAPI</p>
           <p class="muted">RAG pipeline design with vector retrieval and prompt templates for improved factuality. Implemented embedding + retrieval + LLM completion pipeline and a FastAPI service layer.</p>
@@ -178,25 +181,37 @@
       </div>
     </section>
 
-    <!-- EDUCATION -->
+    <!-- EDUCATION (timeline) -->
     <section id="education">
       <h2 class="section-title">Education</h2>
 
-      <div class="edu-grid">
-        <div class="card">
-          <strong>SRM Institute of Science & Technology</strong>
-          <div class="muted">B.Tech, CSE — CGPA: 9.1 (June 2022 – May 2026)</div>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <time>2022 — 2026</time>
+          <div class="timeline-content card">
+            <strong>SRM Institute of Science & Technology</strong>
+            <div class="muted">B.Tech, CSE — CGPA: 9.1</div>
+            <div class="muted">(June 2022 – May 2026)</div>
+          </div>
         </div>
 
-        <div class="card">
-          <strong>XII (Class 12) — CBSE</strong>
-          <div class="muted">Percentage: 85% — School: (add school name)</div>
+        <div class="timeline-item">
+          <time>2022</time>
+          <div class="timeline-content card">
+            <strong>XII (Class 12) — CBSE</strong>
+            <div class="muted">Percentage: 85% — School: (add school name)</div>
+          </div>
         </div>
 
-        <div class="card">
-          <strong>X (Class 10) — CBSE</strong>
-          <div class="muted">Percentage: 93% — School: (add school name)</div>
+        <div class="timeline-item">
+          <time>2020</time>
+          <div class="timeline-content card">
+            <strong>X (Class 10) — CBSE</strong>
+            <div class="muted">Percentage: 93% — School: (add school name)</div>
+          </div>
         </div>
+
       </div>
     </section>
 
