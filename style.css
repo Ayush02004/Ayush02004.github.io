@@ -105,6 +105,33 @@ h2.section-title{text-align:center; font-size:1.5rem; margin-bottom:1rem}
 .meta{font-size:.85rem; color:var(--muted)}
 .link-row{margin-top:.6rem}
 
+/* Project list (media layout) */
+.project-list{display:flex; flex-direction:column; gap:1rem}
+.project-item{
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+  align-items:stretch;
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,0.03);
+  border-radius:12px;
+  padding:1rem;
+}
+/* text first, image second */
+.project-info{order:1}
+.project-item .project-thumb{
+  order:2;
+  width:100%;
+  height:clamp(220px, 28vw, 360px); /* bigger, responsive height */
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.02);
+}
+.project-info h3{margin:0 0 .2rem 0}
+.project-info .meta{font-size:.9rem; color:var(--muted)}
+.project-info .link-row{margin-top:.6rem}
+.project-item:hover{border-color:rgba(255,255,255,0.06)}
+
 /* Experience & Education */
 .exp-item{display:flex; justify-content:space-between; gap:1rem; align-items:flex-start}
 .edu-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem}
@@ -170,4 +197,9 @@ footer{margin-top:2rem; padding:2rem 0; color:var(--muted); border-top:1px solid
   .timeline:before{ left:20px; }
   .timeline-item:before{ left:14px; top:10px; width:10px; height:10px; }
   .timeline-item time{ left:-88px; width:72px; top:6px; font-size:0.9rem; }
+  .project-item{padding:0.9rem}
+}
+@media (max-width:700px){
+  .project-item{grid-template-columns:1fr}
+  .project-item .project-thumb{height:clamp(200px, 45vw, 320px)}
 }
