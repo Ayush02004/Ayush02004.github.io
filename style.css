@@ -4,8 +4,8 @@
   --card: #0f1724;
   --muted: #98a0b3;
   --accent: #7c5cff;
-  --glass: rgba(255,255,255,0.03);
-  --glass-2: rgba(255,255,255,0.02);
+  --glass: rgba(255,255,255,0.06); /* was 0.03: stronger for contrast */
+  --glass-2: rgba(255,255,255,0.04); /* was 0.02 */
   --max-width: 1100px;
 }
 
@@ -29,9 +29,10 @@ a:hover{text-decoration:underline}
 
 /* Header / nav */
 header{position:sticky; top:0; z-index:40; backdrop-filter: blur(6px); background: linear-gradient(180deg, rgba(11,16,32,0.6), rgba(11,16,32,0.35)); border-bottom:1px solid rgba(255,255,255,0.03);} 
-nav{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0.8rem 1rem}
+header .container{ padding:0.5rem 1rem; }
+nav{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0.4rem 0;}
 .brand{display:flex; align-items:center; gap:.8rem}
-.logo{width:44px; height:44px; border-radius:10px; display:grid; place-items:center; font-weight:700; background:linear-gradient(135deg, rgba(124,92,255,0.15), rgba(124,92,255,0.06)); color:var(--accent)}
+.logo{width:36px; height:36px; border-radius:8px; display:grid; place-items:center; font-weight:700; background:linear-gradient(135deg, rgba(124,92,255,0.15), rgba(124,92,255,0.06)); color:var(--accent)}
 .brand-name{font-weight:700}
 .brand-sub{font-size:.85rem; color:var(--muted)}
 .navlinks{display:flex; gap:1rem; align-items:center}
@@ -90,8 +91,18 @@ nav{display:flex; align-items:center; justify-content:space-between; gap:1rem; p
 section{padding:3rem 0}
 h2.section-title{text-align:center; font-size:1.5rem; margin-bottom:1rem}
 .about-grid{display:grid; grid-template-columns: 1fr 320px; gap:1.5rem}
-.card{background:var(--glass); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
+.card{
+  background: var(--glass);
+  padding:1rem;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.08); /* stronger border */
+  box-shadow: 0 6px 20px rgba(2,6,23,0.45); /* subtle elevation */
+}
 .small-list{margin:0.4rem 0 0 1rem}
+
+/* Selected Projects list indentation (About card) */
+.selected-projects-list{ margin-left:0.25rem; padding-left:0.9rem; }
+.selected-projects-list li{ margin-bottom:0.35rem; }
 
 /* Skills */
 .skills{display:flex; gap:.6rem; flex-wrap:wrap}
@@ -112,10 +123,11 @@ h2.section-title{text-align:center; font-size:1.5rem; margin-bottom:1rem}
   flex-direction:column;
   gap:.6rem;
   align-items:stretch;
-  background:var(--glass);
-  border:1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+  border:1px solid rgba(255,255,255,0.10);
   border-radius:12px;
   padding:1rem;
+  box-shadow: 0 8px 24px rgba(2,6,23,0.5);
 }
 /* text first, image second */
 .project-info{order:1}
@@ -130,7 +142,7 @@ h2.section-title{text-align:center; font-size:1.5rem; margin-bottom:1rem}
 .project-info h3{margin:0 0 .2rem 0}
 .project-info .meta{font-size:.9rem; color:var(--muted)}
 .project-info .link-row{margin-top:.6rem}
-.project-item:hover{border-color:rgba(255,255,255,0.06)}
+.project-item:hover{border-color:rgba(255,255,255,0.18)}
 
 /* Experience & Education */
 .exp-item{display:flex; justify-content:space-between; gap:1rem; align-items:flex-start}
@@ -185,21 +197,28 @@ h2.section-title{text-align:center; font-size:1.5rem; margin-bottom:1rem}
 
 footer{margin-top:2rem; padding:2rem 0; color:var(--muted); border-top:1px solid rgba(255,255,255,0.02); text-align:center}
 
+/* Layout tweaks: reduce space between navbar and first card */
+main.container{ padding-top:1rem; }
+.hero{ padding:2rem 0 3rem; }
+
+/* Remove glowing dot from timeline */
+.timeline-item:before{ display:none !important; box-shadow:none !important; }
+
 /* Responsive */
 @media (max-width:900px){
   .about-grid{grid-template-columns:1fr}
   .profile-aside{width:100%}
-  nav{padding:0.6rem 1rem}
+  nav{padding:0.5rem 0.8rem; }
   .hero-inner{flex-direction:column}
   .timeline{
     padding-left:48px;
   }
   .timeline:before{ left:20px; }
-  .timeline-item:before{ left:14px; top:10px; width:10px; height:10px; }
+  /* Fix dot centering on the line: center at 21px (line center), dot width 10 -> left = 21-5 = 16 */
+  .timeline-item:before{ left:16px; top:10px; width:10px; height:10px; }
   .timeline-item time{ left:-88px; width:72px; top:6px; font-size:0.9rem; }
   .project-item{padding:0.9rem}
 }
 @media (max-width:700px){
-  .project-item{grid-template-columns:1fr}
   .project-item .project-thumb{height:clamp(200px, 45vw, 320px)}
 }
