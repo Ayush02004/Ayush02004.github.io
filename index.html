@@ -3,295 +3,233 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Profile Fixes (Avatar / Skills / Timeline)</title>
-  <style>
-    :root{
-      --bg: #071027;
-      --card: rgba(255,255,255,0.02);
-      --muted: rgba(255,255,255,0.5);
-      --accent: #7b61ff;
-      --header-height: 88px; /* adjust to your fixed header height */
-      --timeline-marker-col: 56px;
-    }
+  <title>Ayush Gupta — Data Scientist & ML Engineer</title>
+  <meta name="description" content="Ayush Gupta — Data Science & GenAI. Projects: Brain Tumor Detection, Video Summarization, RAG prototypes. GitHub: Ayush02004" />
 
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg,#050617,#071027);color:#e6eefb}
-    main{max-width:1100px;margin:36px auto;padding:28px}
-    h1,h2{margin:0 0 12px 0}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.35);}
-    /* ---------------- Avatar + initials ---------------- */
-    .top-row{display:flex;gap:20px;align-items:flex-start}
-    .hero{flex:1}
-    .sidebar{width:300px}
-    .avatar{position:relative;width:112px;height:112px;border-radius:999px;overflow:hidden;flex:0 0 112px}
-    .avatar .initials{
-      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;color:white;background:linear-gradient(180deg,var(--accent),#5a46e6);
-      transition:opacity .18s ease, transform .18s ease;
-      z-index:2;
-    }
-    .avatar img.avatar-img{
-      width:100%;height:100%;object-fit:cover;display:block;transform:translateZ(0);
-    }
-    /* visually hide but keep accessible if needed */
-    .hidden-visually {opacity:0;display:none !important}
-
-    /* ---------------- Skills toggle (fixed bug: not clickable) ---------------- */
-    .skills-wrap{margin-top:12px}
-    .skills-toggle{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:999px;color:var(--accent);cursor:pointer}
-    .skills-toggle:focus{outline:2px solid rgba(123,97,255,0.14);outline-offset:2px}
-    .skills-panel{margin-top:12px;display:none;gap:8px;flex-wrap:wrap;align-items:center}
-    .skills-panel.open{display:flex}
-    .skill-pill{padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);font-size:0.95rem}
-
-    /* overlay safety: if you have decorative overlays ensure they don't steal clicks */
-    .page-overlay{pointer-events:none} /* decorative overlays should not intercept events */
-
-    /* ---------------- Education timeline (aligned glowing dots) ---------------- */
-    .education{margin-top:28px}
-    .timeline{position:relative;display:grid;grid-template-columns:var(--timeline-marker-col) 1fr;gap:12px 18px;align-items:start}
-    .timeline::before{
-      content:"";
-      position:absolute;
-      left: calc(var(--timeline-marker-col) / 2);
-      top:0;
-      bottom:0;
-      width:2px;
-      background:linear-gradient(180deg, rgba(123,97,255,0.22), rgba(123,97,255,0.05));
-      z-index:0;
-      border-radius:2px;
-    }
-    .timeline-item{display:contents} /* we use marker + content as grid cells */
-    .timeline-marker{z-index:1;display:flex;align-items:flex-start;justify-content:center;padding-top:6px}
-    .dot{
-      width:12px;height:12px;border-radius:50%;background:var(--accent);
-      box-shadow:0 0 18px rgba(123,97,255,0.34);
-      transform:translateY(0);
-      border:2px solid rgba(0,0,0,0.25);
-    }
-    .timeline-content{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;z-index:1}
-
-    /* small responsive tweaks */
-    @media (max-width:700px){
-      .top-row{flex-direction:column}
-      .sidebar{width:100%}
-      .timeline{grid-template-columns:40px 1fr}
-      .timeline::before{left:20px}
-    }
-
-    /* anchor target spacing for fixed header */
-    .section { scroll-margin-top: calc(var(--header-height) + 8px); }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <main>
-    <!-- Top hero area: avatar + intro -->
-    <div class="top-row">
-      <div class="hero">
-        <div class="card" style="display:flex;gap:16px;align-items:center">
-          <div class="avatar" id="avatar-1" aria-hidden="false">
-            <!-- initials fallback visible until JS hides it when image present -->
-            <div class="initials" id="avatar-initials">AG</div>
-            <!-- replace profile.jpg with your actual image path -->
-            <img src="profile.jpg" alt="Ayush Gupta" class="avatar-img" id="avatar-img" />
-          </div>
 
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <div class="logo" id="logo-fallback">AG</div>
           <div>
-            <h1>Hi — I'm Ayush Gupta</h1>
-            <p style="color:var(--muted);margin-top:8px;max-width:60ch">
-              Final-year B.Tech (CSE) building ML & GenAI systems — model prototyping, RAG pipelines, and production-ready APIs. Currently doing data analysis & MLOps work with REST APIs, Docker and vector-based retrieval.
-            </p>
-            <div style="margin-top:12px">
-              <a class="skills-toggle" id="view-projects-btn" href="#projects">View Projects</a>
-              <button class="skills-toggle" id="open-skills-btn" aria-expanded="false" aria-controls="skills-panel">Show Skills</button>
+            <div class="brand-name">Ayush Gupta</div>
+            <div class="brand-sub">Data Science · GenAI · MLOps</div>
+          </div>
+        </div>
+
+        <div class="navlinks">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-inner">
+
+        <div class="hero-card">
+          <h1>Hi — I'm <span class="accent">Ayush Gupta</span></h1>
+          <p class="lead">Final-year B.Tech (CSE) building ML & GenAI systems — model prototyping, RAG pipelines, and production-ready APIs. Currently doing data analysis & MLOps work with REST APIs, Docker and vector-based retrieval.</p>
+
+          <div class="cta">
+            <a class="btn" href="#projects">View Projects</a>
+            <a class="ghost" href="https://github.com/Ayush02004" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <!-- PROFILE PHOTO (place profile.jpg in repo root) -->
+        <aside class="profile-aside">
+          <div class="profile-card card">
+            <div class="photo-wrap">
+              <img id="profile-photo" src="profile.jpg" alt="Ayush Gupta" crossorigin="anonymous">
+              <div id="initials-fallback" class="initials" aria-hidden="true">AG</div>
+            </div>
+
+            <div class="contact-block">
+              <strong>Contact</strong>
+              <div class="muted">Email: <a href="mailto:ayushgupta2010135@gmail.com">ayushgupta2010135@gmail.com</a></div>
+              <div class="muted">Phone: +91-9958209368</div>
+              <div style="margin-top:.5rem"><a href="https://linkedin.com/in/ayush-gupta-b09165276" target="_blank">LinkedIn</a> · <a href="https://github.com/Ayush02004" target="_blank">GitHub</a></div>
+            </div>
+
+            <div class="quick-stats">
+              <strong>Quick stats</strong>
+              <div class="muted">CGPA: 9.1 / 10 — SRM Institute of Science & Technology</div>
+              <div class="muted">LeetCode: 300+</div>
+              <div class="muted">NPTEL: Data Mining — Top 1%</div>
             </div>
           </div>
-        </div>
+        </aside>
+
       </div>
+    </section>
 
-      <!-- right sidebar with quick contact / stats -->
-      <aside class="sidebar">
-        <div class="card">
-          <img src="profile.jpg" alt="Ayush photo" style="width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:10px">
-          <div style="font-size:0.95rem;color:var(--muted)">
-            <strong>Contact</strong><br>
-            ayushgupta2010135@gmail.com<br>
-            LinkedIn — GitHub
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="section-title">About</h2>
+      <div class="about-grid">
+        <div>
+          <div class="card">
+            <h3>Professional Summary</h3>
+            <p class="muted">Final-year B.Tech (CSE) with hands-on experience building ML and GenAI systems — from data pipelines and model prototyping to deployment and business integration. Strong background in supervised/deep learning, LLM-based systems (RAG), prompt engineering, and productionising models with containerization and cloud services.</p>
+            <p class="muted">Comfortable translating business problems into ML/GenAI solutions and delivering documented demos and reproducible pipelines.</p>
           </div>
-          <div style="margin-top:12px">
-            <strong>Quick stats</strong>
-            <div style="color:var(--muted);font-size:0.95rem;margin-top:6px">CGPA: 9.1 • LeetCode: 300+</div>
+
+          <div style="height:12px"></div>
+
+          <div class="card">
+            <h3>Selected Projects</h3>
+            <ul class="muted small-list">
+              <li><strong>Brain Tumor Detection</strong> — CNN (TensorFlow). Trained on 5,000+ CT images; exported model as TF SavedModel + small REST demo. <a href="https://www.kaggle.com/code/ayushgupta02004/brain-tumor-detection-99-7-accuracy-2m-parameter" target="_blank">Kaggle</a></li>
+              <li><strong>Video Summarization Extension</strong> — Chromium extension using LLMs; batching, caching, background workers. <a href="https://github.com/Ayush02004/summarizer-ext" target="_blank">Repo</a></li>
+              <li><strong>RAG Prototype (HackRx)</strong> — LangChain + Gemini embeddings + FastAPI retrieval & QnA. <a href="https://github.com/Ayush02004/hackrx" target="_blank">Repo</a></li>
+            </ul>
           </div>
         </div>
-      </aside>
-    </div>
 
-    <!-- Skills panel (hidden by default) -->
-    <section id="skills" class="section skills-wrap" aria-labelledby="skills-heading">
-      <h2 id="skills-heading" style="margin-top:22px">Skills</h2>
-      <div class="card" style="margin-top:12px">
-        <div id="skills-panel" class="skills-panel" role="region" aria-hidden="true">
-          <div class="skill-pill">Python</div>
-          <div class="skill-pill">SQL</div>
-          <div class="skill-pill">TensorFlow</div>
-          <div class="skill-pill">PyTorch</div>
-          <div class="skill-pill">scikit-learn</div>
-          <div class="skill-pill">LangChain</div>
-          <div class="skill-pill">RAG</div>
-          <div class="skill-pill">Docker</div>
-          <div class="skill-pill">FastAPI</div>
-          <div class="skill-pill">Azure</div>
+        <aside>
+          <div class="card">
+            <h3>Skills</h3>
+            <div class="skills">
+              <span class="chip">Python</span>
+              <span class="chip">SQL</span>
+              <span class="chip">TensorFlow</span>
+              <span class="chip">PyTorch</span>
+              <span class="chip">scikit-learn</span>
+              <span class="chip">LangChain</span>
+              <span class="chip">RAG</span>
+              <span class="chip">Docker</span>
+              <span class="chip">Azure</span>
+              <span class="chip">FastAPI</span>
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="card certificates">
+            <h3>Certificates</h3>
+            <ul class="muted small-list">
+              <li>Microsoft: AZ-900, AI-900</li>
+              <li>Deep Learning Specialization — Coursera</li>
+              <li>Generative AI with LLMs — AWS</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="section-title">Projects — Selected</h2>
+      <div class="projects-grid">
+
+        <article class="project-card">
+          <!-- optional thumbnail: put image at projects/brain.jpg -->
+          <img class="project-thumb" src="projects/brain.jpg" alt="Brain Tumor Detection preview">
+          <h3>Brain Tumor Detection</h3>
+          <p class="meta">TensorFlow · CNN · Kaggle</p>
+          <p class="muted">Trained on a 5,000+ CT-image dataset with augmentation & cross-validation. Exported as a TF SavedModel and wrapped with a REST demo.</p>
+          <div class="link-row"><a href="https://www.kaggle.com/code/ayushgupta02004/brain-tumor-detection-99-7-accuracy-2m-parameter" target="_blank">View Kaggle Code</a></div>
+        </article>
+
+        <article class="project-card">
+          <img class="project-thumb" src="projects/video.jpg" alt="Video Summarization preview">
+          <h3>Video Summarization (Chromium Extension)</h3>
+          <p class="meta">JavaScript · LLMs · Extension</p>
+          <p class="muted">Extension that summarizes videos and answers queries using an LLM API; built with batching, caching and background workers.</p>
+          <div class="link-row"><a href="https://github.com/Ayush02004/summarizer-ext" target="_blank">GitHub Repo</a></div>
+        </article>
+
+        <article class="project-card">
+          <img class="project-thumb" src="projects/rag.jpg" alt="RAG Prototype preview">
+          <h3>Retrieval-Augmented Generation — RAG Prototype (HackRx)</h3>
+          <p class="meta">LangChain · Gemini API · FastAPI</p>
+          <p class="muted">RAG pipeline design with vector retrieval and prompt templates for improved factuality. Implemented embedding + retrieval + LLM completion pipeline and a FastAPI service layer.</p>
+          <div class="link-row"><a href="https://github.com/Ayush02004/hackrx" target="_blank">Repo</a></div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2 class="section-title">Experience</h2>
+      <div class="card">
+        <div class="exp-item">
+          <div class="left">
+            <strong>Data Analyst Intern — Incanus Technologies (Bengaluru)</strong>
+            <div class="muted">June 2025 – July 2025</div>
+            <p class="muted">Built Looker Studio dashboards for product & sales KPIs; automated ETL tasks (Python) and reduced manual reporting time by ~40%.</p>
+          </div>
+          <div style="text-align:right">
+            <div class="muted">(internship)</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Projects anchor -->
-    <section id="projects" class="section" style="margin-top:28px">
-      <h2>Projects — Selected</h2>
-      <div class="card" style="margin-top:12px">
-        <p style="color:var(--muted)">Brain Tumor Detection, Video Summarization Extension, Retrieval-Augmented Generation — short project cards omitted for brevity.</p>
-      </div>
-    </section>
+    <!-- EDUCATION (timeline) -->
+    <section id="education">
+      <h2 class="section-title">Education</h2>
 
-    <!-- Education with timeline (fix ensures dots align) -->
-    <section id="education" class="section education" style="margin-top:28px">
-      <h2>Education</h2>
-      <div class="timeline" style="margin-top:16px">
-        <!-- item 1 -->
+      <div class="timeline">
+
         <div class="timeline-item">
-          <div class="timeline-marker"><span class="dot" aria-hidden="true"></span></div>
+          <time>2022 — 2026</time>
           <div class="timeline-content card">
             <strong>SRM Institute of Science & Technology</strong>
-            <div style="color:var(--muted);font-size:0.95rem">B.Tech, CSE — CGPA: 9.1 (2022 — 2026)</div>
-            <div style="margin-top:6px;color:var(--muted)">Relevant coursework: ML, Data Structures</div>
+            <div class="muted">B.Tech, CSE — CGPA: 9.1</div>
+            <div class="muted">(June 2022 – May 2026)</div>
           </div>
         </div>
 
-        <!-- item 2 -->
         <div class="timeline-item">
-          <div class="timeline-marker"><span class="dot" aria-hidden="true"></span></div>
+          <time>2022</time>
           <div class="timeline-content card">
             <strong>XII (Class 12) — CBSE</strong>
-            <div style="color:var(--muted);font-size:0.95rem">Percentage: 85% — School: (add school name)</div>
+            <div class="muted">Percentage: 85% — School: (add school name)</div>
           </div>
         </div>
 
-        <!-- item 3 -->
         <div class="timeline-item">
-          <div class="timeline-marker"><span class="dot" aria-hidden="true"></span></div>
+          <time>2020</time>
           <div class="timeline-content card">
             <strong>X (Class 10) — CBSE</strong>
-            <div style="color:var(--muted);font-size:0.95rem">Percentage: 93% — School: (add school name)</div>
+            <div class="muted">Percentage: 93% — School: (add school name)</div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Contact / footer -->
-    <section style="margin-top:36px" class="section">
-      <div class="card">
-        <div style="color:var(--muted)">Email — ayushgupta2010135@gmail.com • GitHub — Ayush02004</div>
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="card" style="text-align:center">
+        <p class="muted">Email — <a href="mailto:ayushgupta2010135@gmail.com">ayushgupta2010135@gmail.com</a></p>
+        <p class="muted">LinkedIn — <a href="https://linkedin.com/in/ayush-gupta-b09165276" target="_blank">Profile</a></p>
+        <p class="muted">GitHub — <a href="https://github.com/Ayush02004" target="_blank">Ayush02004</a></p>
       </div>
     </section>
+
+    <footer>
+      <div>© 2025 Ayush Gupta · Built with ♥️ • Hosted on GitHub Pages</div>
+    </footer>
+
   </main>
 
-  <script>
-    // ========= Avatar initials hide/show =========
-    (function(){
-      const avatar = document.getElementById('avatar-1');
-      if (!avatar) return;
-      const img = avatar.querySelector('.avatar-img');
-      const initials = avatar.querySelector('.initials');
-
-      function hideInitials() {
-        // fade out then set display none for clean removal
-        initials.style.opacity = '0';
-        initials.style.transform = 'translateY(-3px)';
-        setTimeout(()=> { initials.style.display = 'none'; }, 200);
-      }
-      function showInitials() {
-        initials.style.display = 'flex';
-        requestAnimationFrame(()=> {
-          initials.style.opacity = '1';
-          initials.style.transform = 'translateY(0)';
-        });
-      }
-
-      // If an <img> exists
-      if (img) {
-        // If already loaded successfully
-        if (img.complete) {
-          if (img.naturalWidth > 0) hideInitials(); else showInitials();
-        } else {
-          img.addEventListener('load', hideInitials);
-          img.addEventListener('error', showInitials);
-        }
-      } else {
-        // If you use CSS background-image for avatar, hide initials if background present
-        const bg = window.getComputedStyle(avatar).backgroundImage;
-        if (bg && bg !== 'none') hideInitials();
-      }
-
-      // Optional: observe if image src is changed later (e.g., lazy load)
-      const obs = new MutationObserver(()=> {
-        const src = img && img.getAttribute('src');
-        if (src && img.naturalWidth > 0) hideInitials();
-      });
-      if (img) obs.observe(img, { attributes: true, attributeFilter: ['src'] });
-    })();
-
-    // ========= Skills toggle and anchor smooth scroll =========
-    (function(){
-      const skillsBtn = document.getElementById('open-skills-btn');
-      const skillsPanel = document.getElementById('skills-panel');
-      const viewProjectsBtn = document.getElementById('view-projects-btn');
-
-      function setPanelOpen(open) {
-        if (!skillsPanel) return;
-        skillsPanel.classList.toggle('open', open);
-        skillsPanel.setAttribute('aria-hidden', String(!open));
-        if (skillsBtn) skillsBtn.setAttribute('aria-expanded', String(open));
-      }
-
-      document.addEventListener('DOMContentLoaded', ()=> {
-        if (skillsBtn && skillsPanel) {
-          skillsBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            setPanelOpen(!skillsPanel.classList.contains('open'));
-          });
-        }
-
-        // Smooth scroll for all internal anchors with header offset
-        const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 88;
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-          // allow external full-page anchors or disabled anchors
-          a.addEventListener('click', function(e){
-            const href = this.getAttribute('href');
-            if (!href || href === '#') return;
-            const target = document.querySelector(href);
-            if (!target) return;
-            e.preventDefault();
-            // compute position accounting for header
-            const rect = target.getBoundingClientRect();
-            const top = window.scrollY + rect.top - headerHeight - 8; // small gap
-            window.scrollTo({ top, behavior: 'smooth' });
-            // if the anchor points to skills, open the panel
-            if (href === '#skills') setPanelOpen(true);
-          });
-        });
-      });
-    })();
-
-    // ========= defensive: ensure interactive elements are clickable even if overlays exist =========
-    (function(){
-      // If your site has overlays that sometimes block clicks, ensure they don't
-      // block main interactive areas. We set pointer-events:none on any decorative overlay with .page-overlay
-      // and ensure controls explicitly allow pointer events.
-      const interactiveSelectors = ['.skills-toggle','button','a','[role="button"]'];
-      interactiveSelectors.forEach(sel => {
-        document.querySelectorAll(sel).forEach(el => {
-          el.style.pointerEvents = 'auto';
-        });
-      });
-    })();
-  </script>
 </body>
 </html>
