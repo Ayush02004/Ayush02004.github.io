@@ -1,17 +1,3 @@
-<!--
-  Portfolio: Single-file website (index.html)
-  - Dark theme (default)
-  - Populated with details from Ayush Gupta's resume
-  - Ready to drop into a GitHub Pages repo (username.github.io)
-
-  How to use:
-  1. Save this file as `index.html` at the root of a repo named `yourusername.github.io`.
-  2. Commit & push to GitHub. Enable Pages from the `main` branch -> / (root).
-  3. Your site will be live at https://yourusername.github.io
-
-  Want separate style.css and script.js files instead? Tell me and I'll split them.
--->
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,100 +6,8 @@
   <title>Ayush Gupta — Data Scientist & ML Engineer</title>
   <meta name="description" content="Ayush Gupta — Data Science & GenAI. Projects: Brain Tumor Detection, Video Summarization, RAG prototypes. GitHub: Ayush02004" />
 
-  <!-- Theme & fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg: #0b1020;         /* page background */
-      --card: #0f1724;       /* card / section bg */
-      --muted: #98a0b3;      /* secondary text */
-      --accent: #7c5cff;     /* primary accent */
-      --glass: rgba(255,255,255,0.03);
-      --glass-2: rgba(255,255,255,0.02);
-      --success: #22c55e;
-      --max-width: 1100px;
-      --mono: 'ui-monospace', SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
-      font-synthesis: none;
-    }
-
-    /* Reset */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      background: linear-gradient(180deg,var(--bg),#06070a 120%);
-      color: #e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-      padding-bottom:4rem;
-    }
-
-    a{color:var(--accent); text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .container{max-width:var(--max-width); margin:0 auto; padding:2rem}
-
-    /* Header / nav */
-    header{
-      position:sticky; top:0; z-index:40; backdrop-filter: blur(6px);
-      background: linear-gradient(180deg, rgba(11,16,32,0.6), rgba(11,16,32,0.35));
-      border-bottom:1px solid rgba(255,255,255,0.03);
-    }
-    nav{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0.8rem 1rem}
-    .brand{display:flex; align-items:center; gap:.8rem}
-    .logo{width:44px; height:44px; border-radius:10px; display:grid; place-items:center; font-weight:700; background:linear-gradient(135deg, rgba(124,92,255,0.15), rgba(124,92,255,0.06)); color:var(--accent)}
-    .navlinks{display:flex; gap:1rem; align-items:center}
-    .navlinks a{font-weight:600; color:var(--muted)}
-
-    /* Hero */
-    .hero{display:grid; grid-template-columns: 1fr; gap:2rem; align-items:center; padding:4rem 0}
-    .hero-inner{display:flex; gap:2rem; align-items:center}
-    .hero-card{background:linear-gradient(180deg,var(--card),#071227); padding:1.75rem; border-radius:14px; box-shadow:0 8px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.03)}
-    .hero h1{margin:0; font-size:clamp(1.6rem,3.6vw,2.6rem); line-height:1.02}
-    .hero p.lead{color:var(--muted); margin-top:.6rem}
-    .cta{display:inline-flex; gap:.8rem; align-items:center; margin-top:1.25rem}
-    .btn{background:var(--accent); color:#fff; border-radius:10px; padding:.6rem 1rem; font-weight:700}
-    .ghost{background:transparent; border:1px solid rgba(255,255,255,0.04); padding:.55rem .9rem; border-radius:10px; color:var(--muted)}
-
-    /* Sections */
-    section{padding:3rem 0}
-    h2.section-title{text-align:center; font-size:1.5rem; margin-bottom:1rem}
-    .grid{display:grid; gap:1rem}
-
-    /* About + quick stats */
-    .about-grid{display:grid; grid-template-columns: 1fr 320px; gap:1.5rem}
-    .about p{color:var(--muted)}
-    .card{background:var(--glass); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
-
-    /* Skills */
-    .skills{display:flex; gap:.6rem; flex-wrap:wrap}
-    .chip{background:var(--glass-2); padding:.45rem .7rem; border-radius:999px; color:var(--muted); font-weight:600; font-size:.9rem; border:1px solid rgba(255,255,255,0.02)}
-
-    /* Projects */
-    .projects-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem}
-    .project-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
-    .project-card h3{margin:0 0 .5rem 0}
-    .project-card p{color:var(--muted); margin-bottom:.7rem}
-    .meta{font-size:.85rem; color:var(--muted)}
-
-    /* Experience */
-    .exp-item{display:flex; justify-content:space-between; gap:1rem; align-items:flex-start}
-    .exp-item .left{max-width:72%}
-    .exp-item time{display:block; color:var(--muted)}
-
-    footer{margin-top:2rem; padding:2rem 0; color:var(--muted); border-top:1px solid rgba(255,255,255,0.02); text-align:center}
-
-    /* Responsive */
-    @media (max-width:900px){
-      .about-grid{grid-template-columns:1fr}
-      nav{padding:0.6rem 1rem}
-      .hero-inner{flex-direction:column}
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -121,10 +15,10 @@
     <div class="container">
       <nav>
         <div class="brand">
-          <div class="logo">AG</div>
+          <div class="logo" id="logo-fallback">AG</div>
           <div>
-            <div style="font-weight:700">Ayush Gupta</div>
-            <div style="font-size:.85rem;color:var(--muted)">Data Science · GenAI · MLOps</div>
+            <div class="brand-name">Ayush Gupta</div>
+            <div class="brand-sub">Data Science · GenAI · MLOps</div>
           </div>
         </div>
 
@@ -132,6 +26,8 @@
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
           <a href="#contact">Contact</a>
         </div>
       </nav>
@@ -141,10 +37,11 @@
   <main class="container">
 
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="home">
       <div class="hero-inner">
+
         <div class="hero-card" style="flex:1">
-          <h1>Hi — I'm <span style="color:var(--accent)">Ayush Gupta</span></h1>
+          <h1>Hi — I'm <span class="accent">Ayush Gupta</span></h1>
           <p class="lead">Final-year B.Tech (CSE) building ML & GenAI systems — model prototyping, RAG pipelines, and production-ready APIs. Currently doing data analysis & MLOps work with REST APIs, Docker and vector-based retrieval.</p>
 
           <div class="cta">
@@ -153,24 +50,27 @@
           </div>
         </div>
 
-        <aside style="width:300px">
-          <div class="card">
-            <strong>Contact</strong>
-            <div style="margin-top:.6rem; color:var(--muted); font-size:.95rem">
-              <div>Email: <a href="mailto:ayushgupta2010135@gmail.com">ayushgupta2010135@gmail.com</a></div>
-              <div>Phone: +91-9958209368</div>
+        <!-- PROFILE PHOTO (place profile.jpg in repo root) -->
+        <aside class="profile-aside">
+          <div class="profile-card card">
+            <div class="photo-wrap">
+              <!-- script.js will replace this <img> if the file is missing or fails to load -->
+              <img id="profile-photo" src="profile.jpg" alt="Ayush Gupta" crossorigin="anonymous">
+              <div id="initials-fallback" class="initials" aria-hidden="true">AG</div>
+            </div>
+
+            <div class="contact-block">
+              <strong>Contact</strong>
+              <div class="muted">Email: <a href="mailto:ayushgupta2010135@gmail.com">ayushgupta2010135@gmail.com</a></div>
+              <div class="muted">Phone: +91-9958209368</div>
               <div style="margin-top:.5rem"><a href="https://linkedin.com/in/ayush-gupta-b09165276" target="_blank">LinkedIn</a> · <a href="https://github.com/Ayush02004" target="_blank">GitHub</a></div>
             </div>
-          </div>
 
-          <div style="height:12px"></div>
-
-          <div class="card">
-            <strong>Quick stats</strong>
-            <div style="margin-top:.6rem; color:var(--muted)">
-              <div>CGPA: 9.1 / 10 — SRM Institute of Science & Technology</div>
-              <div style="margin-top:.4rem">LeetCode: 300+</div>
-              <div style="margin-top:.4rem">NPTEL: Data Mining — Top 1%</div>
+            <div class="quick-stats">
+              <strong>Quick stats</strong>
+              <div class="muted">CGPA: 9.1 / 10 — SRM Institute of Science & Technology</div>
+              <div class="muted">LeetCode: 300+</div>
+              <div class="muted">NPTEL: Data Mining — Top 1%</div>
             </div>
           </div>
         </aside>
@@ -184,27 +84,27 @@
       <div class="about-grid">
         <div>
           <div class="card">
-            <h3 style="margin-top:0">Professional Summary</h3>
-            <p style="color:var(--muted)">Final-year B.Tech (CSE) with hands-on experience building ML and GenAI systems — from data pipelines and model prototyping to deployment and business integration. Strong background in supervised/deep learning, LLM-based systems (RAG), prompt engineering, and productionising models with containerization and cloud services.</p>
-            <p style="color:var(--muted)">Comfortable translating business problems into ML/GenAI solutions and delivering documented demos and reproducible pipelines.</p>
+            <h3>Professional Summary</h3>
+            <p class="muted">Final-year B.Tech (CSE) with hands-on experience building ML and GenAI systems — from data pipelines and model prototyping to deployment and business integration. Strong background in supervised/deep learning, LLM-based systems (RAG), prompt engineering, and productionising models with containerization and cloud services.</p>
+            <p class="muted">Comfortable translating business problems into ML/GenAI solutions and delivering documented demos and reproducible pipelines.</p>
           </div>
 
           <div style="height:12px"></div>
 
           <div class="card">
-            <h3 style="margin-top:0">Selected Projects</h3>
-            <ul style="margin:0.4rem 0 0 1rem; color:var(--muted)">
+            <h3>Selected Projects</h3>
+            <ul class="muted small-list">
               <li><strong>Brain Tumor Detection</strong> — CNN (TensorFlow). Trained on 5,000+ CT images; exported model as TF SavedModel + small REST demo. <a href="https://www.kaggle.com/code/ayushgupta02004/brain-tumor-detection-99-7-accuracy-2m-parameter" target="_blank">Kaggle</a></li>
-              <li style="margin-top:.5rem"><strong>Video Summarization Extension</strong> — Chromium extension using LLMs; batching, caching, background workers. <a href="https://github.com/Ayush02004/summarizer-ext" target="_blank">Repo</a></li>
-              <li style="margin-top:.5rem"><strong>RAG Prototype (HackRx)</strong> — LangChain + Gemini embeddings + FastAPI retrieval & QnA. <a href="https://github.com/Ayush02004/hackrx" target="_blank">Repo</a></li>
+              <li><strong>Video Summarization Extension</strong> — Chromium extension using LLMs; batching, caching, background workers. <a href="https://github.com/Ayush02004/summarizer-ext" target="_blank">Repo</a></li>
+              <li><strong>RAG Prototype (HackRx)</strong> — LangChain + Gemini embeddings + FastAPI retrieval & QnA. <a href="https://github.com/Ayush02004/hackrx" target="_blank">Repo</a></li>
             </ul>
           </div>
         </div>
 
         <aside>
           <div class="card">
-            <h3 style="margin-top:0">Skills</h3>
-            <div style="margin-top:.6rem" class="skills">
+            <h3>Skills</h3>
+            <div class="skills">
               <span class="chip">Python</span>
               <span class="chip">SQL</span>
               <span class="chip">TensorFlow</span>
@@ -220,9 +120,9 @@
 
           <div style="height:12px"></div>
 
-          <div class="card">
-            <h3 style="margin-top:0">Certificates</h3>
-            <ul style="margin:0.4rem 0 0 1rem; color:var(--muted)">
+          <div class="card certificates">
+            <h3>Certificates</h3>
+            <ul class="muted small-list">
               <li>Microsoft: AZ-900, AI-900</li>
               <li>Deep Learning Specialization — Coursera</li>
               <li>Generative AI with LLMs — AWS</li>
@@ -240,23 +140,22 @@
         <article class="project-card">
           <h3>Brain Tumor Detection</h3>
           <p class="meta">TensorFlow · CNN · Kaggle</p>
-          <p>Trained on a 5,000+ CT-image dataset with augmentation & cross-validation. Exported as a TF SavedModel and wrapped with a REST demo.</p>
-          <div style="margin-top:.6rem"><a href="https://www.kaggle.com/code/ayushgupta02004/brain-tumor-detection-99-7-accuracy-2m-parameter" target="_blank">View Kaggle Code</a></div>
+          <p class="muted">Trained on a 5,000+ CT-image dataset with augmentation & cross-validation. Exported as a TF SavedModel and wrapped with a REST demo.</p>
+          <div class="link-row"><a href="https://www.kaggle.com/code/ayushgupta02004/brain-tumor-detection-99-7-accuracy-2m-parameter" target="_blank">View Kaggle Code</a></div>
         </article>
 
         <article class="project-card">
           <h3>Video Summarization (Chromium Extension)</h3>
           <p class="meta">JavaScript · LLMs · Extension</p>
-          <p>Extension that summarizes videos and answers queries using an LLM API; built with batching, caching and background workers.
-          </p>
-          <div style="margin-top:.6rem"><a href="https://github.com/Ayush02004/summarizer-ext" target="_blank">GitHub Repo</a></div>
+          <p class="muted">Extension that summarizes videos and answers queries using an LLM API; built with batching, caching and background workers.</p>
+          <div class="link-row"><a href="https://github.com/Ayush02004/summarizer-ext" target="_blank">GitHub Repo</a></div>
         </article>
 
         <article class="project-card">
           <h3>Retrieval-Augmented Generation — RAG Prototype (HackRx)</h3>
           <p class="meta">LangChain · Gemini API · FastAPI</p>
-          <p>RAG pipeline design with vector retrieval and prompt templates for improved factuality. Implemented embedding + retrieval + LLM completion pipeline and a FastAPI service layer.</p>
-          <div style="margin-top:.6rem"><a href="https://github.com/Ayush02004/hackrx" target="_blank">Repo</a></div>
+          <p class="muted">RAG pipeline design with vector retrieval and prompt templates for improved factuality. Implemented embedding + retrieval + LLM completion pipeline and a FastAPI service layer.</p>
+          <div class="link-row"><a href="https://github.com/Ayush02004/hackrx" target="_blank">Repo</a></div>
         </article>
 
       </div>
@@ -264,18 +163,39 @@
 
     <!-- EXPERIENCE -->
     <section id="experience">
-      <h2 class="section-title">Experience & Education</h2>
+      <h2 class="section-title">Experience</h2>
       <div class="card">
         <div class="exp-item">
           <div class="left">
             <strong>Data Analyst Intern — Incanus Technologies (Bengaluru)</strong>
-            <div style="color:var(--muted); margin-top:.45rem">June 2025 – July 2025</div>
-            <p style="color:var(--muted); margin-top:.6rem">Built Looker Studio dashboards for product & sales KPIs; automated ETL tasks (Python) and reduced manual reporting time by ~40%.</p>
+            <div class="muted">June 2025 – July 2025</div>
+            <p class="muted">Built Looker Studio dashboards for product & sales KPIs; automated ETL tasks (Python) and reduced manual reporting time by ~40%.</p>
           </div>
           <div style="text-align:right">
-            <div style="font-weight:700">SRM Institute of Science & Technology</div>
-            <div style="color:var(--muted)">B.Tech, CSE — CGPA: 9.1 (June 2022 – May 2026)</div>
+            <div class="muted">(internship)</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <h2 class="section-title">Education</h2>
+
+      <div class="edu-grid">
+        <div class="card">
+          <strong>SRM Institute of Science & Technology</strong>
+          <div class="muted">B.Tech, CSE — CGPA: 9.1 (June 2022 – May 2026)</div>
+        </div>
+
+        <div class="card">
+          <strong>XII (Class 12) — CBSE</strong>
+          <div class="muted">Percentage: 85% — School: (add school name)</div>
+        </div>
+
+        <div class="card">
+          <strong>X (Class 10) — CBSE</strong>
+          <div class="muted">Percentage: 93% — School: (add school name)</div>
         </div>
       </div>
     </section>
@@ -284,9 +204,9 @@
     <section id="contact">
       <h2 class="section-title">Contact</h2>
       <div class="card" style="text-align:center">
-        <p style="color:var(--muted); margin-bottom:1rem">Email — <a href="mailto:ayushgupta2010135@gmail.com">ayushgupta2010135@gmail.com</a></p>
-        <p style="color:var(--muted); margin-bottom:1rem">LinkedIn — <a href="https://linkedin.com/in/ayush-gupta-b09165276" target="_blank">Profile</a></p>
-        <p style="color:var(--muted); margin-bottom:1rem">GitHub — <a href="https://github.com/Ayush02004" target="_blank">Ayush02004</a></p>
+        <p class="muted">Email — <a href="mailto:ayushgupta2010135@gmail.com">ayushgupta2010135@gmail.com</a></p>
+        <p class="muted">LinkedIn — <a href="https://linkedin.com/in/ayush-gupta-b09165276" target="_blank">Profile</a></p>
+        <p class="muted">GitHub — <a href="https://github.com/Ayush02004" target="_blank">Ayush02004</a></p>
       </div>
     </section>
 
@@ -296,23 +216,5 @@
 
   </main>
 
-  <script>
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        e.preventDefault();
-        const target = document.querySelector(a.getAttribute('href'));
-        if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
-      })
-    });
-
-    // Small accessibility: add keyboard focus outlines for keyboard users
-    (function(){
-      function handleFirstTab(e){
-        if(e.key === 'Tab') document.documentElement.classList.add('user-is-tabbing');
-      }
-      window.addEventListener('keydown', handleFirstTab);
-    })();
-  </script>
 </body>
 </html>
