@@ -1,99 +1,318 @@
-<!DOCTYPE html>
+<!--
+  Portfolio: Single-file website (index.html)
+  - Dark theme (default)
+  - Populated with details from Ayush Gupta's resume
+  - Ready to drop into a GitHub Pages repo (username.github.io)
+
+  How to use:
+  1. Save this file as `index.html` at the root of a repo named `yourusername.github.io`.
+  2. Commit & push to GitHub. Enable Pages from the `main` branch -> / (root).
+  3. Your site will be live at https://yourusername.github.io
+
+  Want separate style.css and script.js files instead? Tell me and I'll split them.
+-->
+
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ayush Gupta | Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ayush Gupta — Data Scientist & ML Engineer</title>
+  <meta name="description" content="Ayush Gupta — Data Science & GenAI. Projects: Brain Tumor Detection, Video Summarization, RAG prototypes. GitHub: Ayush02004" />
+
+  <!-- Theme & fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b1020;         /* page background */
+      --card: #0f1724;       /* card / section bg */
+      --muted: #98a0b3;      /* secondary text */
+      --accent: #7c5cff;     /* primary accent */
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --success: #22c55e;
+      --max-width: 1100px;
+      --mono: 'ui-monospace', SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+      font-synthesis: none;
+    }
+
+    /* Reset */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(180deg,var(--bg),#06070a 120%);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding-bottom:4rem;
+    }
+
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .container{max-width:var(--max-width); margin:0 auto; padding:2rem}
+
+    /* Header / nav */
+    header{
+      position:sticky; top:0; z-index:40; backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(11,16,32,0.6), rgba(11,16,32,0.35));
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    nav{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0.8rem 1rem}
+    .brand{display:flex; align-items:center; gap:.8rem}
+    .logo{width:44px; height:44px; border-radius:10px; display:grid; place-items:center; font-weight:700; background:linear-gradient(135deg, rgba(124,92,255,0.15), rgba(124,92,255,0.06)); color:var(--accent)}
+    .navlinks{display:flex; gap:1rem; align-items:center}
+    .navlinks a{font-weight:600; color:var(--muted)}
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns: 1fr; gap:2rem; align-items:center; padding:4rem 0}
+    .hero-inner{display:flex; gap:2rem; align-items:center}
+    .hero-card{background:linear-gradient(180deg,var(--card),#071227); padding:1.75rem; border-radius:14px; box-shadow:0 8px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.03)}
+    .hero h1{margin:0; font-size:clamp(1.6rem,3.6vw,2.6rem); line-height:1.02}
+    .hero p.lead{color:var(--muted); margin-top:.6rem}
+    .cta{display:inline-flex; gap:.8rem; align-items:center; margin-top:1.25rem}
+    .btn{background:var(--accent); color:#fff; border-radius:10px; padding:.6rem 1rem; font-weight:700}
+    .ghost{background:transparent; border:1px solid rgba(255,255,255,0.04); padding:.55rem .9rem; border-radius:10px; color:var(--muted)}
+
+    /* Sections */
+    section{padding:3rem 0}
+    h2.section-title{text-align:center; font-size:1.5rem; margin-bottom:1rem}
+    .grid{display:grid; gap:1rem}
+
+    /* About + quick stats */
+    .about-grid{display:grid; grid-template-columns: 1fr 320px; gap:1.5rem}
+    .about p{color:var(--muted)}
+    .card{background:var(--glass); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
+
+    /* Skills */
+    .skills{display:flex; gap:.6rem; flex-wrap:wrap}
+    .chip{background:var(--glass-2); padding:.45rem .7rem; border-radius:999px; color:var(--muted); font-weight:600; font-size:.9rem; border:1px solid rgba(255,255,255,0.02)}
+
+    /* Projects */
+    .projects-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem}
+    .project-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
+    .project-card h3{margin:0 0 .5rem 0}
+    .project-card p{color:var(--muted); margin-bottom:.7rem}
+    .meta{font-size:.85rem; color:var(--muted)}
+
+    /* Experience */
+    .exp-item{display:flex; justify-content:space-between; gap:1rem; align-items:flex-start}
+    .exp-item .left{max-width:72%}
+    .exp-item time{display:block; color:var(--muted)}
+
+    footer{margin-top:2rem; padding:2rem 0; color:var(--muted); border-top:1px solid rgba(255,255,255,0.02); text-align:center}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .about-grid{grid-template-columns:1fr}
+      nav{padding:0.6rem 1rem}
+      .hero-inner{flex-direction:column}
+    }
+  </style>
 </head>
 <body>
-  <!-- Theme Toggle -->
-  <button id="theme-toggle">🌙</button>
 
-  <!-- Navbar -->
   <header>
-    <nav>
-      <h1>Ayush Gupta</h1>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <div class="logo">AG</div>
+          <div>
+            <div style="font-weight:700">Ayush Gupta</div>
+            <div style="font-size:.85rem;color:var(--muted)">Data Science · GenAI · MLOps</div>
+          </div>
+        </div>
+
+        <div class="navlinks">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <h2>Hi, I'm Ayush 👋</h2>
-    <p>Final-year B.Tech (CSE) | Aspiring Machine Learning Engineer | Data Analyst Intern</p>
-    <a href="#projects" class="btn">View My Work</a>
-  </section>
+  <main class="container">
 
-  <!-- About -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      I’m passionate about Data Science, Machine Learning, and Generative AI. I enjoy solving real-world problems
-      with data, building ML pipelines, and deploying scalable solutions. Currently a Data Analyst Intern at Incanus
-      Technologies, I have hands-on experience in RAG systems, dashboards, and MLOps.
-    </p>
-  </section>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-card" style="flex:1">
+          <h1>Hi — I'm <span style="color:var(--accent)">Ayush Gupta</span></h1>
+          <p class="lead">Final-year B.Tech (CSE) building ML & GenAI systems — model prototyping, RAG pipelines, and production-ready APIs. Currently doing data analysis & MLOps work with REST APIs, Docker and vector-based retrieval.</p>
 
-  <!-- Skills -->
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li>Python, SQL, JavaScript, C</li>
-      <li>TensorFlow, PyTorch, scikit-learn, XGBoost</li>
-      <li>LangChain, RAG, Prompt Engineering, Gemini API</li>
-      <li>Docker, Azure, REST APIs</li>
-      <li>Power BI, Looker Studio, matplotlib</li>
-    </ul>
-  </section>
+          <div class="cta">
+            <a class="btn" href="#projects">View Projects</a>
+            <a class="ghost" href="https://github.com/Ayush02004" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
 
-  <!-- Projects -->
-  <section id="projects">
-    <h2>Projects</h2>
+        <aside style="width:300px">
+          <div class="card">
+            <strong>Contact</strong>
+            <div style="margin-top:.6rem; color:var(--muted); font-size:.95rem">
+              <div>Email: <a href="mailto:ayushgupta2010135@gmail.com">ayushgupta2010135@gmail.com</a></div>
+              <div>Phone: +91-9958209368</div>
+              <div style="margin-top:.5rem"><a href="https://linkedin.com/in/ayush-gupta-b09165276" target="_blank">LinkedIn</a> · <a href="https://github.com/Ayush02004" target="_blank">GitHub</a></div>
+            </div>
+          </div>
 
-    <div class="project">
-      <h3>Brain Tumor Detection Model</h3>
-      <p>Trained CNN on 5,000+ CT images achieving 99.2% accuracy. Deployed via REST API.</p>
-      <a href="https://www.kaggle.com/code/ayushgupta02004/brain-tumor-detection-99-7-accuracy-2m-parameter" target="_blank">Kaggle</a>
-    </div>
+          <div style="height:12px"></div>
 
-    <div class="project">
-      <h3>Video Summarization Extension</h3>
-      <p>Chromium extension using LLM API to summarize videos. Optimized with batching & caching.</p>
-      <a href="https://github.com/Ayush02004/summarizer-ext" target="_blank">GitHub</a>
-    </div>
+          <div class="card">
+            <strong>Quick stats</strong>
+            <div style="margin-top:.6rem; color:var(--muted)">
+              <div>CGPA: 9.1 / 10 — SRM Institute of Science & Technology</div>
+              <div style="margin-top:.4rem">LeetCode: 300+</div>
+              <div style="margin-top:.4rem">NPTEL: Data Mining — Top 1%</div>
+            </div>
+          </div>
+        </aside>
 
-    <div class="project">
-      <h3>HackRx API</h3>
-      <p>FastAPI service integrating Gemini API for PDF-based QnA workflows.</p>
-      <a href="https://github.com/Ayush02004/hackrx" target="_blank">GitHub</a>
-    </div>
+      </div>
+    </section>
 
-    <div class="project">
-      <h3>Hostel Booking Website</h3>
-      <p>Django + SQLite web app with secure authentication and analytics queries.</p>
-      <a href="https://github.com/Ayush02004/hostel_booking" target="_blank">GitHub</a>
-    </div>
-  </section>
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="section-title">About</h2>
+      <div class="about-grid">
+        <div>
+          <div class="card">
+            <h3 style="margin-top:0">Professional Summary</h3>
+            <p style="color:var(--muted)">Final-year B.Tech (CSE) with hands-on experience building ML and GenAI systems — from data pipelines and model prototyping to deployment and business integration. Strong background in supervised/deep learning, LLM-based systems (RAG), prompt engineering, and productionising models with containerization and cloud services.</p>
+            <p style="color:var(--muted)">Comfortable translating business problems into ML/GenAI solutions and delivering documented demos and reproducible pipelines.</p>
+          </div>
 
-  <!-- Contact -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:ayushgupta2010135@gmail.com">ayushgupta2010135@gmail.com</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/ayush-gupta-b09165276" target="_blank">Profile</a></p>
-    <p>GitHub: <a href="https://github.com/Ayush02004" target="_blank">Ayush02004</a></p>
-    <p>LeetCode: <a href="https://leetcode.com/u/ayushg_007" target="_blank">ayushg_007</a></p>
-  </section>
+          <div style="height:12px"></div>
 
-  <footer>
-    <p>© 2025 Ayush Gupta</p>
-  </footer>
+          <div class="card">
+            <h3 style="margin-top:0">Selected Projects</h3>
+            <ul style="margin:0.4rem 0 0 1rem; color:var(--muted)">
+              <li><strong>Brain Tumor Detection</strong> — CNN (TensorFlow). Trained on 5,000+ CT images; exported model as TF SavedModel + small REST demo. <a href="https://www.kaggle.com/code/ayushgupta02004/brain-tumor-detection-99-7-accuracy-2m-parameter" target="_blank">Kaggle</a></li>
+              <li style="margin-top:.5rem"><strong>Video Summarization Extension</strong> — Chromium extension using LLMs; batching, caching, background workers. <a href="https://github.com/Ayush02004/summarizer-ext" target="_blank">Repo</a></li>
+              <li style="margin-top:.5rem"><strong>RAG Prototype (HackRx)</strong> — LangChain + Gemini embeddings + FastAPI retrieval & QnA. <a href="https://github.com/Ayush02004/hackrx" target="_blank">Repo</a></li>
+            </ul>
+          </div>
+        </div>
 
-  <script src="script.js"></script>
+        <aside>
+          <div class="card">
+            <h3 style="margin-top:0">Skills</h3>
+            <div style="margin-top:.6rem" class="skills">
+              <span class="chip">Python</span>
+              <span class="chip">SQL</span>
+              <span class="chip">TensorFlow</span>
+              <span class="chip">PyTorch</span>
+              <span class="chip">scikit-learn</span>
+              <span class="chip">LangChain</span>
+              <span class="chip">RAG</span>
+              <span class="chip">Docker</span>
+              <span class="chip">Azure</span>
+              <span class="chip">FastAPI</span>
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="card">
+            <h3 style="margin-top:0">Certificates</h3>
+            <ul style="margin:0.4rem 0 0 1rem; color:var(--muted)">
+              <li>Microsoft: AZ-900, AI-900</li>
+              <li>Deep Learning Specialization — Coursera</li>
+              <li>Generative AI with LLMs — AWS</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="section-title">Projects — Selected</h2>
+      <div class="projects-grid">
+
+        <article class="project-card">
+          <h3>Brain Tumor Detection</h3>
+          <p class="meta">TensorFlow · CNN · Kaggle</p>
+          <p>Trained on a 5,000+ CT-image dataset with augmentation & cross-validation. Exported as a TF SavedModel and wrapped with a REST demo.</p>
+          <div style="margin-top:.6rem"><a href="https://www.kaggle.com/code/ayushgupta02004/brain-tumor-detection-99-7-accuracy-2m-parameter" target="_blank">View Kaggle Code</a></div>
+        </article>
+
+        <article class="project-card">
+          <h3>Video Summarization (Chromium Extension)</h3>
+          <p class="meta">JavaScript · LLMs · Extension</p>
+          <p>Extension that summarizes videos and answers queries using an LLM API; built with batching, caching and background workers.
+          </p>
+          <div style="margin-top:.6rem"><a href="https://github.com/Ayush02004/summarizer-ext" target="_blank">GitHub Repo</a></div>
+        </article>
+
+        <article class="project-card">
+          <h3>Retrieval-Augmented Generation — RAG Prototype (HackRx)</h3>
+          <p class="meta">LangChain · Gemini API · FastAPI</p>
+          <p>RAG pipeline design with vector retrieval and prompt templates for improved factuality. Implemented embedding + retrieval + LLM completion pipeline and a FastAPI service layer.</p>
+          <div style="margin-top:.6rem"><a href="https://github.com/Ayush02004/hackrx" target="_blank">Repo</a></div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2 class="section-title">Experience & Education</h2>
+      <div class="card">
+        <div class="exp-item">
+          <div class="left">
+            <strong>Data Analyst Intern — Incanus Technologies (Bengaluru)</strong>
+            <div style="color:var(--muted); margin-top:.45rem">June 2025 – July 2025</div>
+            <p style="color:var(--muted); margin-top:.6rem">Built Looker Studio dashboards for product & sales KPIs; automated ETL tasks (Python) and reduced manual reporting time by ~40%.</p>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:700">SRM Institute of Science & Technology</div>
+            <div style="color:var(--muted)">B.Tech, CSE — CGPA: 9.1 (June 2022 – May 2026)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="card" style="text-align:center">
+        <p style="color:var(--muted); margin-bottom:1rem">Email — <a href="mailto:ayushgupta2010135@gmail.com">ayushgupta2010135@gmail.com</a></p>
+        <p style="color:var(--muted); margin-bottom:1rem">LinkedIn — <a href="https://linkedin.com/in/ayush-gupta-b09165276" target="_blank">Profile</a></p>
+        <p style="color:var(--muted); margin-bottom:1rem">GitHub — <a href="https://github.com/Ayush02004" target="_blank">Ayush02004</a></p>
+      </div>
+    </section>
+
+    <footer>
+      <div>© 2025 Ayush Gupta · Built with ♥️ • Hosted on GitHub Pages</div>
+    </footer>
+
+  </main>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+      })
+    });
+
+    // Small accessibility: add keyboard focus outlines for keyboard users
+    (function(){
+      function handleFirstTab(e){
+        if(e.key === 'Tab') document.documentElement.classList.add('user-is-tabbing');
+      }
+      window.addEventListener('keydown', handleFirstTab);
+    })();
+  </script>
 </body>
 </html>
