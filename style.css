@@ -49,9 +49,41 @@ nav{display:flex; align-items:center; justify-content:space-between; gap:1rem; p
 
 .profile-aside{width:320px}
 .profile-card{display:flex; flex-direction:column; gap:.9rem}
-.photo-wrap{position:relative; width:100%; height:220px; display:grid; place-items:center; border-radius:10px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.02)}
-#profile-photo{width:100%; height:100%; object-fit:cover; display:block}
-#initials-fallback{position:absolute; inset:0; display:grid; place-items:center; font-weight:800; font-size:2rem; color:var(--accent); background:transparent}
+
+/* photo block: initials hidden by default, image stacked under initials */
+.photo-wrap{
+  position:relative;
+  width:100%;
+  height:220px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+  border:1px solid rgba(255,255,255,0.02);
+}
+
+/* image sits behind fallback; show image by default */
+#profile-photo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  z-index:1;
+}
+
+/* initials fallback hidden by default; JS will show if needed */
+#initials-fallback{
+  position:absolute;
+  inset:0;
+  display:none;            /* hidden initially */
+  place-items:center;
+  font-weight:800;
+  font-size:2rem;
+  color:var(--accent);
+  background:transparent;
+  z-index:2;
+}
 
 .muted{color:var(--muted)}
 
@@ -77,12 +109,47 @@ h2.section-title{text-align:center; font-size:1.5rem; margin-bottom:1rem}
 .exp-item{display:flex; justify-content:space-between; gap:1rem; align-items:flex-start}
 .edu-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem}
 
-/* Timeline */
-.timeline{position:relative; padding-left:36px}
-.timeline:before{content:''; position:absolute; left:18px; top:0; bottom:0; width:2px; background:linear-gradient(180deg, rgba(124,92,255,0.18), rgba(124,92,255,0.07)); border-radius:2px}
-.timeline-item{position:relative; margin-bottom:1rem}
-.timeline-item:before{content:''; position:absolute; left:10px; top:6px; width:16px; height:16px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 6px rgba(124,92,255,0.06)}
-.timeline-item time{display:block; position:absolute; left:-120px; width:100px; text-align:right; color:var(--muted); top:0}
+/* Timeline - aligned dots (updated values for correct alignment) */
+.timeline{
+  position:relative;
+  padding-left:64px; /* space for the vertical line + time labels */
+}
+.timeline:before{
+  content:'';
+  position:absolute;
+  left:32px;         /* center of the vertical line */
+  top:0;
+  bottom:0;
+  width:2px;
+  background:linear-gradient(180deg, rgba(124,92,255,0.18), rgba(124,92,255,0.07));
+  border-radius:2px;
+}
+.timeline-item{
+  position:relative;
+  margin-bottom:1rem;
+  padding-top:6px;
+}
+.timeline-item:before{
+  content:'';
+  position:absolute;
+  left:26px;          /* place dot centered on the vertical line */
+  top:12px;           /* vertical alignment of the dot relative to item */
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 6px rgba(124,92,255,0.06);
+}
+.timeline-item time{
+  display:block;
+  position:absolute;
+  left:-112px;        /* position the year label to the left, aligned right */
+  width:96px;
+  text-align:right;
+  color:var(--muted);
+  top:6px;
+  font-size:0.95rem;
+}
 .timeline-content{margin-left:0}
 
 /* Certificates margin fix: ensure consistent spacing */
@@ -97,7 +164,10 @@ footer{margin-top:2rem; padding:2rem 0; color:var(--muted); border-top:1px solid
   .profile-aside{width:100%}
   nav{padding:0.6rem 1rem}
   .hero-inner{flex-direction:column}
-  .timeline:before{left:8px}
-  .timeline-item:before{left:2px}
-  .timeline-item time{left:-80px}
+  .timeline{
+    padding-left:48px;
+  }
+  .timeline:before{ left:20px; }
+  .timeline-item:before{ left:14px; top:10px; width:10px; height:10px; }
+  .timeline-item time{ left:-88px; width:72px; top:6px; font-size:0.9rem; }
 }
