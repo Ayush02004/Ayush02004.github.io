@@ -46,14 +46,28 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
 
-  // Project thumbnail fallback: hide broken images so layout stays clean
+  // Project thumbnail: lazy-load + placeholder fallback instead of hiding
+  const PLACEHOLDER_THUMB = 'projects/placeholder.jpg';
   document.querySelectorAll('.project-thumb').forEach(imgEl => {
-    imgEl.addEventListener('error', ()=>{ imgEl.style.display = 'none'; });
-    // try HEAD but ignore CORS by wrapping
+    // enable lazy loading and async decoding
+    if(!imgEl.hasAttribute('loading')) imgEl.setAttribute('loading','lazy');
+    imgEl.setAttribute('decoding','async');
+
+    const swapToPlaceholder = () => {
+      // avoid infinite loop: if already swapped, hide to keep layout clean
+      if(imgEl.dataset.fallbackApplied === '1') { imgEl.style.display = 'none'; return; }
+      imgEl.src = PLACEHOLDER_THUMB;
+      imgEl.dataset.fallbackApplied = '1';
+      imgEl.style.display = 'block';
+    };
+
+    imgEl.addEventListener('error', swapToPlaceholder);
+
+    // try HEAD but ignore CORS; if missing, swap to placeholder
     try {
       fetch(imgEl.src, {method:'HEAD'}).then(r=>{
         if(!r.ok) throw new Error('no');
-      }).catch(()=>{ imgEl.style.display = 'none'; });
+      }).catch(swapToPlaceholder);
     } catch(e){
       // ignore and rely on load/error events
     }
