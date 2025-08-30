@@ -7,7 +7,10 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- 🔹 Navbar -->
+  <!-- Theme Toggle -->
+  <button id="theme-toggle">🌙</button>
+
+  <!-- Navbar -->
   <header>
     <nav>
       <h1>Ayush Gupta</h1>
@@ -20,54 +23,77 @@
     </nav>
   </header>
 
-  <!-- 🔹 Hero Section -->
-  <section id="home">
-    <div class="hero">
-      <h2>Hi, I'm Ayush 👋</h2>
-      <p>Aspiring Machine Learning Engineer | Data Analyst Intern</p>
-      <a href="#projects" class="btn">View My Work</a>
-    </div>
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <h2>Hi, I'm Ayush 👋</h2>
+    <p>Final-year B.Tech (CSE) | Aspiring Machine Learning Engineer | Data Analyst Intern</p>
+    <a href="#projects" class="btn">View My Work</a>
   </section>
 
-  <!-- 🔹 About -->
+  <!-- About -->
   <section id="about">
     <h2>About Me</h2>
-    <p>I'm a Computer Science graduate passionate about Data Science, ML, and building impactful solutions...</p>
+    <p>
+      I’m passionate about Data Science, Machine Learning, and Generative AI. I enjoy solving real-world problems
+      with data, building ML pipelines, and deploying scalable solutions. Currently a Data Analyst Intern at Incanus
+      Technologies, I have hands-on experience in RAG systems, dashboards, and MLOps.
+    </p>
   </section>
 
-  <!-- 🔹 Skills -->
+  <!-- Skills -->
   <section id="skills">
     <h2>Skills</h2>
     <ul>
-      <li>Python</li>
-      <li>Machine Learning</li>
-      <li>Data Analysis</li>
-      <li>FastAPI</li>
-      <li>React (basic)</li>
+      <li>Python, SQL, JavaScript, C</li>
+      <li>TensorFlow, PyTorch, scikit-learn, XGBoost</li>
+      <li>LangChain, RAG, Prompt Engineering, Gemini API</li>
+      <li>Docker, Azure, REST APIs</li>
+      <li>Power BI, Looker Studio, matplotlib</li>
     </ul>
   </section>
 
-  <!-- 🔹 Projects -->
+  <!-- Projects -->
   <section id="projects">
     <h2>Projects</h2>
+
+    <div class="project">
+      <h3>Brain Tumor Detection Model</h3>
+      <p>Trained CNN on 5,000+ CT images achieving 99.2% accuracy. Deployed via REST API.</p>
+      <a href="https://www.kaggle.com/code/ayushgupta02004/brain-tumor-detection-99-7-accuracy-2m-parameter" target="_blank">Kaggle</a>
+    </div>
+
+    <div class="project">
+      <h3>Video Summarization Extension</h3>
+      <p>Chromium extension using LLM API to summarize videos. Optimized with batching & caching.</p>
+      <a href="https://github.com/Ayush02004/summarizer-ext" target="_blank">GitHub</a>
+    </div>
+
     <div class="project">
       <h3>HackRx API</h3>
-      <p>Built with FastAPI to call Gemini API and handle PDF + QnA format responses.</p>
-      <a href="https://github.com/yourusername/hackrx-api" target="_blank">GitHub</a>
+      <p>FastAPI service integrating Gemini API for PDF-based QnA workflows.</p>
+      <a href="https://github.com/Ayush02004/hackrx" target="_blank">GitHub</a>
     </div>
-    <!-- Add more projects here -->
+
+    <div class="project">
+      <h3>Hostel Booking Website</h3>
+      <p>Django + SQLite web app with secure authentication and analytics queries.</p>
+      <a href="https://github.com/Ayush02004/hostel_booking" target="_blank">GitHub</a>
+    </div>
   </section>
 
-  <!-- 🔹 Contact -->
+  <!-- Contact -->
   <section id="contact">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:your@email.com">your@email.com</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">Profile</a></p>
-    <p>GitHub: <a href="https://github.com/yourusername" target="_blank">yourusername</a></p>
+    <p>Email: <a href="mailto:ayushgupta2010135@gmail.com">ayushgupta2010135@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/ayush-gupta-b09165276" target="_blank">Profile</a></p>
+    <p>GitHub: <a href="https://github.com/Ayush02004" target="_blank">Ayush02004</a></p>
+    <p>LeetCode: <a href="https://leetcode.com/u/ayushg_007" target="_blank">ayushg_007</a></p>
   </section>
 
   <footer>
     <p>© 2025 Ayush Gupta</p>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
